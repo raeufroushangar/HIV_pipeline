@@ -19,6 +19,5 @@ This directory contains configuration files for the project.
 15. `hiv_subtyping_alignment_worker.py`: Python script for HIV subtyping alignment.
 16. `pol_region_coordinates_finder.py`: Python script to find coordinates in the pol region.
 17. `extracting_seq_within_pol_region.py`: Algorithm to extract the HIV-I pol-region within the query sequence.
-   - Algorithm workflow summary:
-   
+   - `extracting_seq_within_pol_region.py` workflow summary:
    ![Workflow Summary](../figures/pol_region_finder_extractor.png)
