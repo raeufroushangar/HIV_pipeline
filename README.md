@@ -3,7 +3,7 @@
 ## Project Description
 This pipeline runs natively on public health departments' network system to predict HIV transmission and outbreak progression, guiding public health mitigation efforts.
 
-#### Pipeline Workflow Summary
+#### Pipeline Workflow Summary:
 ![Workflow Summary](/figures/pipline_workflow.png)
 
 ## Directory Structure
