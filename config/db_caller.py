@@ -1,3 +1,5 @@
+from path_finder import find_apps_in_external_apps_dir
+from db_installer import install_postgres
 import psycopg2
 
 def create_postgres_database(database, user, password, host, port):
@@ -14,7 +16,18 @@ def create_postgres_database(database, user, password, host, port):
     Returns:
     - message (str): A message indicating the success or failure of the database creation and privilege granting.
     """
+    connection = None
     try:
+        # Find the path to the PostgreSQL binary directory
+        pgsql_path = find_apps_in_external_apps_dir()
+        if pgsql_path is None:
+            return "Error: PostgreSQL binary directory not found."
+
+        # Install PostgreSQL
+        install_result = install_postgres(pgsql_path)
+        if install_result.startswith("Error"):
+            return install_result
+
         # Connect to the default PostgreSQL database
         connection = psycopg2.connect(
             database="postgres",
@@ -27,14 +40,14 @@ def create_postgres_database(database, user, password, host, port):
 
         # Create a cursor to interact with the database
         with connection.cursor() as cursor:
-            # Create the new database
-            cursor.execute(f"CREATE DATABASE {database};")
+            # Create the new database in the 'pgsql' directory
+            cursor.execute(f"CREATE DATABASE {database} TEMPLATE template0 ENCODING 'UTF8' LC_COLLATE='C' LC_CTYPE='C';")
 
             # Grant privileges to the user on the new database
             cursor.execute(f"GRANT ALL PRIVILEGES ON DATABASE {database} TO {user};")
             cursor.execute(f"ALTER USER {user} WITH SUPERUSER;")
 
-            return f"Database '{database}' created successfully. Admin privileges granted to user '{user}'."
+        return f"Database '{database}' created successfully. Admin privileges granted to user '{user}'."
     except Exception as e:
         # Return an error message if an exception occurs
         return f"Error: {str(e)}"
@@ -89,3 +102,4 @@ def drop_postgres_database(database, user, password, host, port):
         # Close the connection
         if connection:
             connection.close()
+

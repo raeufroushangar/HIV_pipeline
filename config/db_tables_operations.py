@@ -301,3 +301,20 @@ def drop_table(database, user, password, host, port, table_name):
     except psycopg2.Error as e:
         # Return an error message if an exception occurs
         return f"An error occurred: {str(e)}"
+
+    
+def write_table_to_sql(table_column_dict, table_name, file_path):
+    """
+    Write a CREATE TABLE SQL command to a .sql file.
+
+    Parameters:
+    - table_column_dict (dict): A dictionary where keys are column names and values are their data types.
+    - table_name (str): The name of the table to be created.
+    - file_path (str): The path to the .sql file where the SQL command will be written.
+    """
+    with open(file_path, 'a') as file:
+        file.write(f"\n-- Create table {table_name}\n")
+        file.write(f"CREATE TABLE IF NOT EXISTS {table_name} (\n")
+        for column_name, data_type in table_column_dict.items():
+            file.write(f"    {column_name} {data_type},\n")
+        file.write(");\n")

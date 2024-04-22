@@ -1,23 +1,7 @@
-import os
+from path_finder import find_apps_in_external_apps_dir
 import platform
 import subprocess
-
-def find_path():
-    # Find the current working directory of the script
-    current_directory = os.getcwd()
-
-    # Search for the 'hiv_desktop_app' directory starting from the current directory
-    while 'hiv_desktop_app' not in os.listdir(current_directory):
-        current_directory = os.path.dirname(current_directory)
-
-    # Once the 'hiv_desktop_app' directory is found, construct the path to Muscle 
-    muscle_path = os.path.join(current_directory, 'hiv_desktop_app/bin/external_apps')
-
-    # Check if the Muscle executable exists at the specified path
-    if os.path.exists(muscle_path):
-        return muscle_path
-    else:
-        return None
+import os
 
 def check_os():
     os_name = platform.system().lower()  # Get the operating system name and convert to lowercase
@@ -48,9 +32,8 @@ def create_activation_script(filename, activation_script):
     os.chmod(f"activate_{filename}.sh", 0o755)
 
 
-
 def install_and_activate_mafft():
-    directory_path = find_path()
+    directory_path = find_apps_in_external_apps_dir()
     os_name = check_os()
 
     # Check if "mafft" is in the directory specified by directory_path
@@ -82,6 +65,3 @@ def install_and_activate_mafft():
         # Source the activation script to activate .bash_profile
         subprocess.run(["bash", f"activate_{profile_filename}.sh"])
         return mafft_mac_dir_path+'mafft.bat'
-
-# # Call the function to install and activate MAFFT
-# install_and_activate_mafft()

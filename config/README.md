@@ -21,3 +21,6 @@ This directory contains configuration files for the project.
 17. `extracting_seq_within_pol_region.py`: Algorithm to extract the HIV-I pol-region within the query sequence.
    ##### `extracting_seq_within_pol_region` algorithm summary:
    ![algorithm summary](../figures/pol_region_finder_extractor.png)
+18. `db_installer.py`: Python script for installing the database.
+19. `multistate_character_cleaner.py`: Python script for cleaning multistate characters.
+20. `path_finder.py`: Python script for finding paths.
