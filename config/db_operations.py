@@ -117,7 +117,6 @@ def db_wrapper(pgsql_path, database, user, password, host, port, read_db_tables_
 
         # Start or connect to PostgreSQL server
         start_result = start_or_connect_postgres(pgsql_path)
-        print(start_result)
         if start_result.startswith("Error"):
             return start_result
 
@@ -133,19 +132,33 @@ def db_wrapper(pgsql_path, database, user, password, host, port, read_db_tables_
         cursor = connection.cursor()
         cursor.execute("SELECT 1 FROM pg_database WHERE datname = %s;", (database,))
         if cursor.fetchone() is not None:
-            return f"PostgreSQL server started. Database '{database}' already exists."
-
+            # Database already exists, check for tables
+            cursor.execute("SELECT table_name FROM information_schema.tables WHERE table_schema = 'public';")
+            existing_tables = [row[0] for row in cursor.fetchall()]
+            
+            # Read table information from JSON file
+            db_tables_info = read_db_tables_from_json(db_tables_json_path)
+            for table_name, table_data in db_tables_info["tables"].items():
+                if table_name not in existing_tables:
+                    # Table does not exist, create it
+                    column_dict = table_data["column_dict"]
+                    create_table(database, user, password, host, port, column_dict, table_name)
+            
+            return f"PostgreSQL server started. Database '{database}' already exists. Tables checked and created if needed."
+        
         # Create PostgreSQL database
         create_result = create_db(database, user, password, host, port)
         if create_result.startswith("Error"):
             return create_result
 
+        # Database was created, create tables
         db_tables_info = read_db_tables_from_json(db_tables_json_path)
         for table_name, table_data in db_tables_info["tables"].items():
             column_dict = table_data["column_dict"]
             create_table(database, user, password, host, port, column_dict, table_name)
 
-        return f"PostgreSQL installed, server started, and database '{database}' created successfully."
+        return f"PostgreSQL installed, server started, and database '{database}' created successfully with tables."
+
     except Exception as e:
         return f"Error: {str(e)}"
 
