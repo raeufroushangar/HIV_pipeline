@@ -25,7 +25,7 @@ This pipeline runs natively on public health departments' network systems to pre
 **Installation Instructions:**
 
 1. Clone the repository: `git clone https://github.com/MolEvolEpid/HIV_pipeline.git`
-2. Change to the 'HIV_pipeline_main' directory: `cd HIV_pipeline_main`
+2. Change to the 'HIV_pipeline' directory: `cd HIV_pipeline`
 3. Run setup.sh: `./setup.sh`
    - Jupyter Notebook will open, allowing you to execute different cells.
 4. Run deactivate_env.sh: `./deactivate_env.sh`
