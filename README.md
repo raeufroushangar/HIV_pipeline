@@ -1,20 +1,33 @@
 # Computational Pipeline for HIV Outbreak Monitoring
 
 ## Project Description
-This pipeline runs natively on public health departments' network system to predict HIV transmission and outbreak progression, guiding public health mitigation efforts.
+This pipeline runs natively on public health departments' network systems to predict HIV transmission and outbreak progression, guiding public health mitigation efforts.
 
-#### Pipeline Workflow Summary:
-![Workflow Summary](/figures/pipline_workflow.png)
-
+### Pipeline Workflow Summary:
+![Workflow Summary](pipline_workflow.png)
 ## Directory Structure
-- `analysis`: Contains scripts and data for data analysis.
-- `bin`: Contains executable files.
-- `dev`: Contains development scripts and files.
-- `src`: Contains source code files.
-- `assets`: Contains static assets such as images or fonts.
+- `assets`: Contains description files of accepted data.
+- `bin`: Contains database and external applications.
 - `config`: Contains configuration files.
-- `notebooks`: Contains Jupyter notebooks for data exploration.
+- `src`: Contains source code files.
 - `tests`: Contains test scripts.
 
-## Current Status
-I am currently uploading code to this project. Stay tuned for updates!
+## External Tools
+- MAFFT version 7
+- PostgreSQL 16.2
+
+## System Requirements
+- macOS 14.4.1 
+- Python 3.9.6
+- pip3 24
+- *May work with similar versions.
+
+**Installation Instructions:**
+
+1. Clone the repository: `git clone https://github.com/MolEvolEpid/HIV_pipeline_main.git`
+2. Change to the 'HIV_pipeline_main' directory: `cd HIV_pipeline_main`
+3. Run setup.sh: `./setup.sh`
+   - Jupyter Notebook will open, allowing you to execute different cells.
+4. Run deactivate_env.sh: `./deactivate_env.sh`
+
+*Note: Jupyter Notebook is used here to demonstrate user prompting for "data upload" and "header matching". Once the software is fully developed, all scripts in this repository should run natively, with no changes, on any operating system using Docker.*
