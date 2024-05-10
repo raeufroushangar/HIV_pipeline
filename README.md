@@ -9,7 +9,7 @@ This pipeline runs natively on public health departments' network systems to pre
 - `assets`: Contains description files of accepted data.
 - `bin`: Contains database and external applications.
 - `config`: Contains configuration files.
-- `tests`: Contains test scripts.
+- `tests`: Contains test data.
 
 ## External Tools
 - MAFFT version 7
