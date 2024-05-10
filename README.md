@@ -29,3 +29,5 @@ This pipeline runs natively on public health departments' network systems to pre
 3. Run setup.sh: `./setup.sh`
    - Jupyter Notebook will open, allowing you to execute different cells.
 4. Run deactivate_env.sh: `./deactivate_env.sh`
+
+*Note: Jupyter Notebook is used here to demonstrate user prompting for "data upload" and "header matching". Once the software is fully developed, all scripts in this repository should run natively, with no changes, on any operating system using Docker.*
