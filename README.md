@@ -9,7 +9,6 @@ This pipeline runs natively on public health departments' network systems to pre
 - `assets`: Contains description files of accepted data.
 - `bin`: Contains database and external applications.
 - `config`: Contains configuration files.
-- `src`: Contains source code files.
 - `tests`: Contains test scripts.
 
 ## External Tools
